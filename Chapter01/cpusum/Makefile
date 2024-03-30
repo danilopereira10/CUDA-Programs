@@ -7,7 +7,7 @@
 ################################################################################
 
 # default program name. Note use command line option NAME=... as neceessary
-NAME := defaultname
+NAME := cpusum
 
 # change these to match your installation
 CUDA_PATH := /usr/local/cuda
