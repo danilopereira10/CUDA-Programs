@@ -28,7 +28,7 @@ $(NAME): $(NAME).o
 	cp $(NAME) ../../Linux/
 	
 $(NAME).o: $(NAME).cpp
-	nvcc -c $(CUDACFLAGS) $<
+	nvcc -c -I $(CX_ROOT) -I $(NVCUDASAMPLES_ROOT) $(NAME).cpp $(CUDACFLAGS) $<
 #	g++ -c -O2 -I $(CX_ROOT) -I $(NVCUDASAMPLES_ROOT) $(NAME).cpp
     
 run: build
