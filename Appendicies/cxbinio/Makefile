@@ -15,7 +15,7 @@ CUDA_PATH := /usr/local/cuda
 NVCUDASAMPLES_ROOT := ~/samples/cuda-samples/Common
 # assumes examples installed in directory ~/CudaBook 
 CX_ROOT := ~/CudaBook/CUDA-Programs/include
-CUDACFLAGS= -std=c++11 -c -O3 -lineinfo -arch=sm_70 -Xptxas=-v
+CUDACFLAGS= -std=c++17 -c -O3 -lineinfo -arch=sm_70 -Xptxas=-v
 
 
 # Target rules
