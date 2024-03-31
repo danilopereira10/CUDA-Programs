@@ -15,6 +15,7 @@ CUDA_PATH := /usr/local/cuda
 NVCUDASAMPLES_ROOT := ~/samples/cuda-samples/Common
 # assumes examples installed in directory ~/CudaBook 
 CX_ROOT := ~/CudaBook/CUDA-Programs/include
+CUDACFLAGS= -std=c++17 -c -O3 -lineinfo -arch=sm_70 -Xptxas=-v -I../external/cub
 
 
 # Target rules
@@ -27,7 +28,8 @@ $(NAME): $(NAME).o
 	cp $(NAME) ../../Linux/
 
 $(NAME).o: $(NAME).cpp
-	g++ -c -O2 -I $(CX_ROOT) -I $(NVCUDASAMPLES_ROOT) $(NAME).cpp
+	nvcc -c -I $(CX_ROOT) -I $(NVCUDASAMPLES_ROOT) $(NAME).cpp $(CUDACFLAGS) $<
+#	g++ -c -O2 -I $(CX_ROOT) -I $(NVCUDASAMPLES_ROOT) $(NAME).cpp
     
 run: build
 	$(EXEC) ./$(NAME)
