@@ -51,14 +51,13 @@ int main(int argc,char *argv[])
 
 	cx::timer tim;
 	gpu_sin<<<blocks,threads>>>(dptr,steps,terms,(float)step_size);
-	double gpu_sum[2];
-	gpu_sum[0] = thrust::reduce(dsums.begin(),dsums.end());
+	double gpu_sum = thrust::reduce(dsums.begin(),dsums.end());
 	double gpu_time = tim.lap_ms(); // get elapsed time
 
 	// Trapezoidal Rule Correction
-	gpu_sum[0] -= 0.5*(sinsum(0.0f,terms)+sinsum(pi,terms));
-	gpu_sum[0] *= step_size;
+	gpu_sum -= 0.5*(sinsum(0.0f,terms)+sinsum(pi,terms));
+	gpu_sum *= step_size;
 	printf("gpu sum = %.10f, steps %d terms %d time %.3f ms\n",
-		gpu_sum[0],steps,terms,gpu_time);
+		gpu_sum,steps,terms,gpu_time);
 	return 0;
 }
