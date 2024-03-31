@@ -14,6 +14,7 @@ CUDA_PATH := /usr/local/cuda
 NVCUDASAMPLES_ROOT := ~/samples/cuda-samples/Common
 # assumes examples installed in directory ~/CudaBook 
 CX_ROOT := ~/CudaBook/CUDA-Programs/include
+CUDACFLAGS= -std=c++17 -c -O3 -lineinfo -arch=sm_70 -Xptxas=-v
 
 
 # Target rules
@@ -25,7 +26,7 @@ $(NAME).o: $(NAME).cu
 	$(CUDA_PATH)/bin/nvcc -ccbin g++ -I $(NVCUDASAMPLES_ROOT)/ -I $(CX_ROOT)/ -m64  --threads 0 --use_fast_math -gencode arch=compute_86,code=sm_86 -o $(NAME).o -c $(NAME).cu
     
 $(NAME): $(NAME).o   
-	$(CUDA_PATH)/bin/nvcc -ccbin g++ -m64 -gencode arch=compute_86,code=sm_86 -o $(NAME) $(NAME).o
+	$(CUDA_PATH)/bin/nvcc -ccbin g++ -m64 -gencode -arch=sm_70 -o $(NAME) $(NAME).o
 	cp $(NAME) ../../Linux/
 
 run: build
