@@ -13,6 +13,7 @@
 // gpu sum = 1.9999998123, steps 1000000000 terms 1000 time 726.253 ms
 
 #include "cx.h"
+#include <curand.h>
 #include "cxtimers.h"              // cx timers
 
 __host__ __device__ inline float sinsum(float x,int terms)
@@ -51,7 +52,7 @@ int main(int argc,char *argv[])
 
 	cx::timer tim;
 	gpu_sin<<<blocks,threads>>>(dptr,steps,terms,(float)step_size);
-	thrust::device_vector<float> gpu_sum(2);
+	double gpu_sum[2];
 	gpu_sum[0] = thrust::reduce(dsums.begin(),dsums.end());
 	double gpu_time = tim.lap_ms(); // get elapsed time
 
