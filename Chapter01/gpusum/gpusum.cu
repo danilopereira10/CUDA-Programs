@@ -17,6 +17,14 @@
 #include "cxtimers.h"              // cx timers
 #include "cudamacro.h"
 
+enum Color {BLACK, WHITE, GREEN};
+
+#define J0 1.0f
+#define J1 0.0f
+#define J2 -1.0f
+
+#define THREADS  128
+
 __host__ __device__ inline float sinsum(float x,int terms)
 {
 	float x2 = x*x;
@@ -113,7 +121,7 @@ int main(int argc,char *argv[])
 	int steps = (argc > 1) ? atoi(argv[1]) : 10000000; // get command
 	int terms = (argc > 2) ? atoi(argv[2]) : 1000;     // line arguments
 	int threads = 256;
-	int blocks = (steps+threads-1)/threads;  // ensure threads*blocks ≥ steps
+	// int blocks = (steps+threads-1)/threads;  // ensure threads*blocks ≥ steps
 
 	double pi = 3.14159265358979323;
 	double step_size = pi / (nx*ny-1); // NB n-1 steps between n points
