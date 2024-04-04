@@ -16,6 +16,8 @@
 #include <curand.h>
 #include "cxtimers.h"              // cx timers
 #include "cudamacro.h"
+#include "cuda_runtime.h"
+#include <cublas_v2.h>
 
 enum Color {BLACK, WHITE, GREEN};
 
