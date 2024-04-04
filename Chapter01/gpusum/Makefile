@@ -26,7 +26,7 @@ $(NAME).o: $(NAME).cu
 	$(CUDA_PATH)/bin/nvcc -ccbin g++ -I $(NVCUDASAMPLES_ROOT)/ -I $(CX_ROOT)/ -m64  --threads 0 --use_fast_math -gencode arch=compute_70,code=sm_70 -o $(NAME).o -c $(NAME).cu
     
 $(NAME): $(NAME).o   
-	$(CUDA_PATH)/bin/nvcc -ccbin g++ -m64 -gencode arch=compute_70,code=sm_70 -o $(NAME) $(NAME).o
+	$(CUDA_PATH)/bin/nvcc -lcurand -ccbin g++ -m64 -gencode arch=compute_70,code=sm_70 -o $(NAME) $(NAME).o
 	cp $(NAME) ../../Linux/
 
 run: build
